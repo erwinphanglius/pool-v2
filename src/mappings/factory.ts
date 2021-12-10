@@ -3,17 +3,18 @@ import {
   PoolFactory,
   PoolCreation
 } from "../../generated/PoolFactory/PoolFactory"
-import { Factory } from "../../generated/schema"
+import { Factory, Pool } from "../../generated/schema"
+import { MetaversepadTemplate } from "../../generated/templates"
 
 export function handlePoolCreation(event: PoolCreation): void {
   // Entities can be loaded from the store using a string ID; this ID
   // needs to be unique across all entities of the same type
-  let entity = Factory.load(event.transaction.hash.toHex())
+  let factoryEntity = Factory.load(event.transaction.hash.toHex())
 
   // Entities only exist after they have been saved to the store;
   // `null` checks allow to create entities on demand
-  if (!entity) {
-    entity = new Factory(event.transaction.hash.toHex())
+  if (!factoryEntity) {
+    factoryEntity = new Factory(event.transaction.hash.toHex())
 
     // Entity fields can be set using simple assignments
     // entity.count = BigInt.fromI32(0)
@@ -23,11 +24,13 @@ export function handlePoolCreation(event: PoolCreation): void {
   // entity.count = entity.count + BigInt.fromI32(1)
 
   // Entity fields can be set based on event parameters
-  entity.timestamp = event.params.timestamp
-  entity.poolAddress = event.params.poolAddress
+  factoryEntity.timestamp = event.params.timestamp
+  factoryEntity.poolAddress = event.params.poolAddress
 
   // Entities can be written to the store with `.save()`
-  entity.save()
+  MetaversepadTemplate.create(event.params.poolAddress)
+
+  factoryEntity.save()
 
   // Note: If a handler doesn't require existing field values, it is faster
   // _not_ to load the entity from the store. Instead, create it fresh with
