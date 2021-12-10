@@ -1,6 +1,11 @@
-type ExampleEntity @entity {
+type Factory @entity {
   id: ID!
-  count: BigInt!
-  previousOwner: Bytes! # address
-  newOwner: Bytes! # address
+  timestamp: BigInt! # address
+  poolAddress: Bytes! # address
+}
+
+type Pool @entity {
+  id: ID!
+  address: Bytes! # address
+  balance: BigInt!
 }

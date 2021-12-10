@@ -1,31 +1,30 @@
 import { BigInt } from "@graphprotocol/graph-ts"
 import {
   PoolFactory,
-  OwnershipTransferred,
   PoolCreation
-} from "../generated/PoolFactory/PoolFactory"
-import { ExampleEntity } from "../generated/schema"
+} from "../../generated/PoolFactory/PoolFactory"
+import { Factory } from "../../generated/schema"
 
-export function handleOwnershipTransferred(event: OwnershipTransferred): void {
+export function handlePoolCreation(event: PoolCreation): void {
   // Entities can be loaded from the store using a string ID; this ID
   // needs to be unique across all entities of the same type
-  let entity = ExampleEntity.load(event.transaction.from.toHex())
+  let entity = Factory.load(event.transaction.hash.toHex())
 
   // Entities only exist after they have been saved to the store;
   // `null` checks allow to create entities on demand
   if (!entity) {
-    entity = new ExampleEntity(event.transaction.from.toHex())
+    entity = new Factory(event.transaction.hash.toHex())
 
     // Entity fields can be set using simple assignments
-    entity.count = BigInt.fromI32(0)
+    // entity.count = BigInt.fromI32(0)
   }
 
   // BigInt and BigDecimal math are supported
-  entity.count = entity.count + BigInt.fromI32(1)
+  // entity.count = entity.count + BigInt.fromI32(1)
 
   // Entity fields can be set based on event parameters
-  entity.previousOwner = event.params.previousOwner
-  entity.newOwner = event.params.newOwner
+  entity.timestamp = event.params.timestamp
+  entity.poolAddress = event.params.poolAddress
 
   // Entities can be written to the store with `.save()`
   entity.save()
@@ -49,4 +48,4 @@ export function handleOwnershipTransferred(event: OwnershipTransferred): void {
   // - contract.owner(...)
 }
 
-export function handlePoolCreation(event: PoolCreation): void {}
+// export function handlePoolCreation(event: PoolCreation): void {}
