@@ -9,7 +9,7 @@ import { Factory, Pool } from "../../generated/schema"
 export function handleFundPool(evtPoolInfo: FundPool): void {
   // Entities can be loaded from the store using a string ID; this ID
   // needs to be unique across all entities of the same type
-  let entity = Pool.load(evtPoolInfo.params.initiator.toHexString())
+  let entity = Pool.load(evtPoolInfo.params.initiator.toHexString() && evtPoolInfo.address.toHexString())
 
   // Entities only exist after they have been saved to the store;
   // `null` checks allow to create entities on demand
