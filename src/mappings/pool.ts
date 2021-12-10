@@ -35,6 +35,7 @@ export function handleFundPool(evtPoolInfo: FundPool): void {
 
   participantEntity.balance = evtPoolInfo.params.value;
 //   participantEntity.pool = entity;
+participantEntity.save()
   entity.save()
 
   // Note: If a handler doesn't require existing field values, it is faster
