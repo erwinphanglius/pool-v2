@@ -1,0 +1,46 @@
+specVersion: 0.0.2
+schema:
+  file: schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: PoolFactory
+    network: chapel
+    source:
+      address: "0xa6a90a7cFFdcceB2a9E3CF61a9a01B04F049A376"
+      startBlock: 14860152
+      abi: PoolFactory
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - PoolCreation
+      abis:
+        - name: PoolFactory
+          file: PoolFactory/abis/PoolFactory.json
+      eventHandlers:
+        - event: PoolCreation(indexed uint256,indexed address,indexed
+            address,uint256,uint256,uint256,uint256,uint256)
+          handler: handlePoolCreation
+      file: PoolFactory/PoolFactory.wasm
+templates:
+  - kind: ethereum/contract
+    name: MetaversepadTemplate
+    network: chapel
+    source:
+      abi: Metaversepad
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - MetaversepadPool
+      abis:
+        - name: Metaversepad
+          file: MetaversepadTemplate/abis/Metaversepad.json
+        - name: PoolFactory
+          file: MetaversepadTemplate/abis/PoolFactory.json
+      eventHandlers:
+        - event: FundPool(indexed uint256,indexed address,uint256)
+          handler: handleFundPool
+      file: templates/MetaversepadTemplate/MetaversepadTemplate.wasm

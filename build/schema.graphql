@@ -1,0 +1,11 @@
+type Factory @entity {
+  id: ID!
+  timestamp: BigInt! # address
+  poolAddress: Bytes! # address
+}
+
+type Pool @entity {
+  id: ID!
+  address: Bytes! # address
+  balance: BigInt!
+}
