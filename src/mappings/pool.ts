@@ -6,15 +6,15 @@ import {
 } from "../../generated/templates/MetaversepadTemplate/Metaversepad"
 import { Factory, Pool } from "../../generated/schema"
 
-export function handleFundPool(evtPoolCreation: PoolCreation, evtPoolInfo: FundPool): void {
+export function handleFundPool(evtPoolInfo: FundPool): void {
   // Entities can be loaded from the store using a string ID; this ID
   // needs to be unique across all entities of the same type
-  let entity = Pool.load(evtPoolCreation.params.poolAddress.toHexString())
+  let entity = Pool.load(evtPoolInfo.address.toHexString())
 
   // Entities only exist after they have been saved to the store;
   // `null` checks allow to create entities on demand
   if (!entity) {
-    entity = new Pool(evtPoolCreation.params.poolAddress.toHexString())
+    entity = new Pool(evtPoolInfo.address.toHexString())
 
     // Entity fields can be set using simple assignments
     // entity.count = BigInt.fromI32(0)
