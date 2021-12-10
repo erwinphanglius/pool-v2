@@ -6,6 +6,10 @@ type Factory @entity {
 
 type Pool @entity {
   id: ID!
-  poolAddress: Bytes! # address
+}
+
+type PoolParticipant @entity {
+  id: ID!
   balance: BigInt!
+  pool: Pool!
 }
