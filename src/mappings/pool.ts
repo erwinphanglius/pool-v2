@@ -34,7 +34,7 @@ export function handleFundPool(evtPoolInfo: FundPool): void {
   // Entities can be written to the store with `.save()`
 
   participantEntity.balance = evtPoolInfo.params.value;
-//   participantEntity.pool = entity;
+  participantEntity.pool = entity.id;
 participantEntity.save()
   entity.save()
 
