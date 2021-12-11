@@ -4,28 +4,32 @@ import {
 import {
   FundPool
 } from "../../generated/templates/MetaversepadTemplate/Metaversepad"
-import { Factory, Pool, PoolParticipant } from "../../generated/schema"
+import { Factory, User, PoolByUser } from "../../generated/schema"
 
 export function handleFundPool(evtPoolInfo: FundPool): void {
-  let entity = Pool.load(evtPoolInfo.address.toHexString())
+  let entity = PoolByUser.load(evtPoolInfo.address.toHexString())
 
   if (!entity) {
-    entity = new Pool(evtPoolInfo.address.toHexString())
+    entity = new PoolByUser(evtPoolInfo.address.toHexString())
   }
 
-  let participantEntity = PoolParticipant.load(evtPoolInfo.params.initiator.toHexString())
+  entity.poolAddress = evtPoolInfo.address
+  entity.user = evtPoolInfo.params.initiator;
+  entity.value = evtPoolInfo.params.value;
 
-  if (!participantEntity) {
-    participantEntity = new PoolParticipant(evtPoolInfo.params.initiator.toHexString())
-  }
+  // let participantEntity = PoolParticipant.load(evtPoolInfo.params.initiator.toHexString())
 
-  participantEntity.balance = evtPoolInfo.params.value;
+  // if (!participantEntity) {
+  //   participantEntity = new PoolParticipant(evtPoolInfo.params.initiator.toHexString())
+  // }
+
+  // participantEntity.balance = evtPoolInfo.params.value;
   // participantEntity.balance = participantEntity.balance.plus(evtPoolInfo.params.value);
   // participantEntity.user = evtPoolInfo.params.initiator;
 
-  entity.participant.push(participantEntity.id)
+  // entity.participant.push(participantEntity.id)
 
-  participantEntity.save()  
+  // participantEntity.save()  
   entity.save()
 }
 

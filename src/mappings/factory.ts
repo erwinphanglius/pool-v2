@@ -3,7 +3,7 @@ import {
   PoolFactory,
   PoolCreation
 } from "../../generated/PoolFactory/PoolFactory"
-import { Factory, Pool } from "../../generated/schema"
+import { Factory } from "../../generated/schema"
 import { MetaversepadTemplate } from "../../generated/templates"
 
 export function handlePoolCreation(event: PoolCreation): void {
