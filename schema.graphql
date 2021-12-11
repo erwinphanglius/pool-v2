@@ -11,6 +11,5 @@ type Pool @entity {
 
 type PoolParticipant @entity {
   id: ID!
-  user: Bytes! # address
   balance: BigInt!
 }
