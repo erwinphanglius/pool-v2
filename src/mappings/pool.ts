@@ -13,10 +13,10 @@ export function handleFundPool(evtPoolInfo: FundPool): void {
     entity = new Pool(evtPoolInfo.address.toHexString())
   }
 
-  let participantEntity = PoolParticipant.load(evtPoolInfo.params.initiator.toHexString())
+  let participantEntity = PoolParticipant.load(evtPoolInfo.transaction.hash.toHexString())
 
   if (!participantEntity) {
-    participantEntity = new PoolParticipant(evtPoolInfo.params.initiator.toHexString())
+    participantEntity = new PoolParticipant(evtPoolInfo.transaction.hash.toHexString())
   }
 
   participantEntity.id = evtPoolInfo.params.initiator.toHexString();
