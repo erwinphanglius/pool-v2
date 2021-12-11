@@ -13,17 +13,17 @@ export function handleFundPool(evtPoolInfo: FundPool): void {
     entity = new Pool(evtPoolInfo.address.toHexString())
   }
 
-  // let participantEntity = PoolParticipant.load(evtPoolInfo.transaction.hash.toHex())
+  let participantEntity = PoolParticipant.load(evtPoolInfo.transaction.hash.toHex())
 
-  // if (!participantEntity) {
-  //   participantEntity = new PoolParticipant(evtPoolInfo.transaction.hash.toHex())
-  // }
+  if (!participantEntity) {
+    participantEntity = new PoolParticipant(evtPoolInfo.transaction.hash.toHex())
+  }
 
-  // participantEntity.user = evtPoolInfo.params.initiator;
-  // participantEntity.balance = evtPoolInfo.params.value;
-  // entity.participant = participantEntity.id;
-  // // entity.participant = [participantEntity.id];
-  // participantEntity.save()
+  participantEntity.user = evtPoolInfo.params.initiator;
+  participantEntity.balance = evtPoolInfo.params.value;
+  entity.participant = participantEntity.id;
+  // entity.participant = [participantEntity.id];
+  participantEntity.save()
   entity.save()
 }
 
