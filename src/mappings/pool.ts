@@ -38,7 +38,7 @@ export function handleFundPool(evtPoolInfo: FundPool): void {
   entity.user = evtPoolInfo.params.initiator;
   entity.value = evtPoolInfo.params.value;
 
-  userEntity.balance = userEntity.balance.plus(evtPoolInfo.params.value)
+  userEntity.totalFundAllPool = userEntity.totalFundAllPool.plus(evtPoolInfo.params.value)
   poolEntity.members = [evtPoolInfo.params.initiator.toHex()]
 
   // let id = address.toHexString();
