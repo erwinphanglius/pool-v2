@@ -20,10 +20,12 @@ import { Factory, User, PoolByUser, Pool } from "../../generated/schema"
 // }
 
 export function handleFundPool(evtPoolInfo: FundPool): void {
+  let obj = []
+
   let entity = PoolByUser.load(evtPoolInfo.transaction.hash.toHex())
   let userEntity = User.load(evtPoolInfo.params.initiator.toHex())
   let poolEntity = Pool.load(evtPoolInfo.address.toHex())
-
+  
   if (!entity) {
     entity = new PoolByUser(evtPoolInfo.transaction.hash.toHex())
   }
@@ -33,13 +35,15 @@ export function handleFundPool(evtPoolInfo: FundPool): void {
   if (!poolEntity) {
     poolEntity = new Pool(evtPoolInfo.address.toHex())
   }
+  obj.push(userEntity.id)
 
   entity.poolAddress = evtPoolInfo.address;
   entity.user = evtPoolInfo.params.initiator;
   entity.value = evtPoolInfo.params.value;
 
+
   userEntity.totalFundAllPool = userEntity.totalFundAllPool.plus(evtPoolInfo.params.value)
-  poolEntity.members = [evtPoolInfo.params.initiator.toHex()]
+  poolEntity.members = obj;
 
   // let id = address.toHexString();
   // PoolByUser.load(User)
