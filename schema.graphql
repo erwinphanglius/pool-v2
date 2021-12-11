@@ -6,12 +6,12 @@ type Factory @entity {
 
 type Pool @entity {
   id: ID!
-  members: User!
+  members: [User!]!
 }
 
 type User @entity {
   id: ID!
-  pools: [Pool!]! @derivedFrom(field:"members")
+  balance: BigInt!
 }
 
 type PoolByUser @entity {
