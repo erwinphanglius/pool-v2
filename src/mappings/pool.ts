@@ -7,13 +7,13 @@ import {
 import { Factory, User, PoolByUser } from "../../generated/schema"
 
 export function handleFundPool(evtPoolInfo: FundPool): void {
-  let entity = PoolByUser.load(evtPoolInfo.address.toHexString())
+  let entity = PoolByUser.load(evtPoolInfo.transaction.hash.toHex())
 
   if (!entity) {
-    entity = new PoolByUser(evtPoolInfo.address.toHexString())
+    entity = new PoolByUser(evtPoolInfo.transaction.hash.toHex())
   }
 
-  entity.poolAddress = evtPoolInfo.address
+  entity.poolAddress = evtPoolInfo.address;
   entity.user = evtPoolInfo.params.initiator;
   entity.value = evtPoolInfo.params.value;
 

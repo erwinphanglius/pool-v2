@@ -1,15 +1,17 @@
 type Factory @entity {
   id: ID!
-  timestamp: BigInt! # address
+  timestamp: BigInt!
   poolAddress: Bytes! # address
 }
 
-type Pool @entity {
+type User @entity {
   id: ID!
-  participant: [PoolParticipant!]!
+  pool: [PoolByUser!]!
 }
 
-type PoolParticipant @entity {
+type PoolByUser @entity {
   id: ID!
-  balance: BigInt!
+  user: Bytes! # address
+  poolAddress: Bytes!
+  value: BigInt!
 }
