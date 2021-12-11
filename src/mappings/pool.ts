@@ -25,9 +25,9 @@ export function handleFundPool(evtPoolInfo: FundPool): void {
   // entity.participant = participantEntity.id;
   // entity.participant = [participantEntity.id];
   
+  participantEntity.save()
   entity.participant = participantEntity.id;
   
-  participantEntity.save()
   entity.save()
 }
 
