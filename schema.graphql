@@ -12,6 +12,5 @@ type User @entity {
 type PoolByUser @entity {
   id: ID!
   user: Bytes! # address
-  poolAddress: Bytes!
   value: BigInt!
 }
