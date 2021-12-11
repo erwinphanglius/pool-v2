@@ -6,7 +6,7 @@ type Factory @entity {
 
 type Pool @entity {
   id: ID!
-  participant: PoolParticipant!
+  participant: [PoolParticipant!]
 }
 
 type PoolParticipant @entity {
