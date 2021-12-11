@@ -19,6 +19,7 @@ export function handleFundPool(evtPoolInfo: FundPool): void {
     participantEntity = new PoolParticipant(evtPoolInfo.transaction.hash.toHex())
   }
 
+  participantEntity.user = evtPoolInfo.params.initiator;
   participantEntity.balance = evtPoolInfo.params.value;
   entity.participant = participantEntity.id;
   // entity.participant = [participantEntity.id];
