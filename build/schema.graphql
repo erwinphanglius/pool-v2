@@ -4,14 +4,19 @@ type Factory @entity {
   poolAddress: Bytes! # address
 }
 
+type Pool @entity {
+  id: ID!
+  members: [User!]!
+}
+
 type User @entity {
   id: ID!
-  pool: [PoolByUser!]!
+  pools: [Pool!]! @derivedFrom(field:"members")
 }
 
 type PoolByUser @entity {
   id: ID!
-  user: Bytes! # address
   poolAddress: Bytes!
+  user: Bytes! # address
   value: BigInt!
 }
