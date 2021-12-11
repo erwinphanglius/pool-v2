@@ -5,7 +5,7 @@ import {
 import {
   FundPool
 } from "../../generated/templates/MetaversepadTemplate/Metaversepad"
-import { Factory, User, PoolByUser, Pool } from "../../generated/schema"
+import { Factory, PoolByUser } from "../../generated/schema"
 
 // export function bindToUser(address: Address, poolAddress: Address, newBalance: BigInt): void {
 //   let id = address.toHexString();
