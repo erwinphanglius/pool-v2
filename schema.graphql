@@ -4,6 +4,21 @@ type Factory @entity {
   poolAddress: Bytes! # address
 }
 
+type Pool @entity {
+  id: ID!
+}
+
+type User @entity {
+  id: ID!
+  totalFundAllPool: BigInt!
+  pool: [Pool!]!
+}
+
+type PoolWithUser @entity {
+  id: ID!
+  value: BigInt!
+}
+
 type PoolByUser @entity {
   id: ID!
   poolAddress: Bytes!
