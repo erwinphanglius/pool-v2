@@ -19,6 +19,11 @@ import { Factory, User, PoolByUser, Pool, PoolWithUser } from "../../generated/s
 //   user.save();
 // }
 
+export function loadOrCreatePool(poolAddress: Address): Pool {
+  let pool = Pool.load(poolAddress.toHex())
+  return pool as Pool
+}
+
 export function handleFundPool(evtPoolInfo: FundPool): void {
   let entity = PoolByUser.load(evtPoolInfo.transaction.hash.toHex())
   let userEntity = User.load(evtPoolInfo.params.initiator.toHex())
@@ -43,7 +48,7 @@ export function handleFundPool(evtPoolInfo: FundPool): void {
   entity.value = evtPoolInfo.params.value;
   
   userEntity.totalFundAllPool = userEntity.totalFundAllPool.plus(evtPoolInfo.params.value)
-  userEntity.pool = [poolEntity.id]
+  userEntity.pool = [loadOrCreatePool(evtPoolInfo.address).id]
 
   poolWithUserEntity.value = poolWithUserEntity.value.plus(evtPoolInfo.params.value);
   poolEntity.user = evtPoolInfo.params.initiator;
