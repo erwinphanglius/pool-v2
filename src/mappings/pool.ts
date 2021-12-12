@@ -71,6 +71,7 @@ export function handleFundPool(evtPoolInfo: FundPool): void {
   entity.save()
   userEntity.save()
   poolEntity.save()
+  poolWithUserEntity.save()
 
 }
 
