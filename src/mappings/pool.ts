@@ -19,10 +19,10 @@ import { Factory, User, PoolByUser, Pool, PoolWithUser } from "../../generated/s
 //   user.save();
 // }
 
-export function loadOrCreatePool(poolAddress: Address): Pool {
-  let pool = Pool.load(poolAddress.toHex())
-  return pool as Pool
-}
+// export function loadOrCreatePool(poolAddress: Address): Pool {
+//   let pool = Pool.load(poolAddress.toHex())
+//   return pool as Pool
+// }
 
 export function handleFundPool(evtPoolInfo: FundPool): void {
   let entity = PoolByUser.load(evtPoolInfo.transaction.hash.toHex())
@@ -42,18 +42,19 @@ export function handleFundPool(evtPoolInfo: FundPool): void {
   if (!poolWithUserEntity) {
     poolWithUserEntity = new PoolWithUser(evtPoolInfo.address.toHex() + "-" + evtPoolInfo.params.initiator.toHex())
   }
-  
+
   entity.poolAddress = evtPoolInfo.address;
   entity.user = evtPoolInfo.params.initiator;
   entity.value = evtPoolInfo.params.value;
   
   userEntity.totalFundAllPool = userEntity.totalFundAllPool.plus(evtPoolInfo.params.value)
-  userEntity.pool = [loadOrCreatePool(evtPoolInfo.address).id]
+  userEntity.pool = [entity.poolAddress.toHex()]
 
   poolWithUserEntity.value = poolWithUserEntity.value.plus(evtPoolInfo.params.value);
-  poolEntity.user = evtPoolInfo.params.initiator;
-  poolEntity.value = evtPoolInfo.params.value.plus(evtPoolInfo.params.value)
+  // poolEntity.user = evtPoolInfo.params.initiator;
+  // poolEntity.value = evtPoolInfo.params.value.plus(evtPoolInfo.params.value)
 
+  // poolEntity.user = [new Member(evtPoolInfo.params.initiator.toHex())]
   // let id = address.toHexString();
   // PoolByUser.load(User)
 
