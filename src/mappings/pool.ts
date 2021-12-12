@@ -40,7 +40,7 @@ export function handleFundPool(evtPoolInfo: FundPool): void {
     poolEntity = new Pool(evtPoolInfo.address.toHex())
   }
   if (!poolWithUserEntity) {
-    poolWithUserEntity = new PoolWithUser(evtPoolInfo.address.toHex() + "-" + evtPoolInfo.params.initiator.toHex())
+    poolWithUserEntity = new PoolWithUser(evtPoolInfo.params.initiator.toHex() + "-" + evtPoolInfo.address.toHex())
   }
 
   entity.poolAddress = evtPoolInfo.address;
@@ -51,7 +51,7 @@ export function handleFundPool(evtPoolInfo: FundPool): void {
   // userEntity.pool = [
 
   poolWithUserEntity.value = poolWithUserEntity.value.plus(evtPoolInfo.params.value);
-  userEntity.pool = [poolWithUserEntity.id]
+  userEntity.pool.push(evtPoolInfo.address.toHex())
   // poolEntity.user = evtPoolInfo.params.initiator;
   // poolEntity.value = evtPoolInfo.params.value.plus(evtPoolInfo.params.value)
 

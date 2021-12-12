@@ -11,7 +11,7 @@ type Pool @entity {
 type User @entity {
   id: ID!
   totalFundAllPool: BigInt!
-  pool: [Pool!]!
+  pool: [PoolWithUser!]!
 }
 
 type PoolWithUser @entity {
