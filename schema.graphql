@@ -6,6 +6,8 @@ type Factory @entity {
 
 type Pool @entity {
   id: ID!
+  user: User!
+  value: BigInt!
 }
 
 type User @entity {
