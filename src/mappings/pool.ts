@@ -42,42 +42,21 @@ export function handleFundPool(evtPoolInfo: FundPool): void {
   if (!poolWithUserEntity) {
     poolWithUserEntity = new PoolWithUser(evtPoolInfo.params.initiator.toHex() + "-" + evtPoolInfo.address.toHex())
   }
-  // poolEntity.value = evtPoolInfo.params.value.plus(evtPoolInfo.params.value)
 
   entity.poolAddress = evtPoolInfo.address;
   entity.user = evtPoolInfo.params.initiator;
   entity.value = evtPoolInfo.params.value;
-  
-  poolEntity.users = [evtPoolInfo.params.initiator.toHex()]
+  entity.save()
+
   userEntity.totalFundAllPool = userEntity.totalFundAllPool.plus(evtPoolInfo.params.value)
-  userEntity.pool = poolEntity.id
+  let userPool = userEntity.pool;
+  userPool.push(entity.id)
+  userEntity.pool = userPool;
+  userEntity.save()
+
+  // userEntity.pool = poolEntity.id
   poolWithUserEntity.value = poolWithUserEntity.value.plus(evtPoolInfo.params.value);
 
-  entity.save()
-  userEntity.save()
   poolEntity.save()
   poolWithUserEntity.save()
-
-  // poolEntity.user = evtPoolInfo.params.initiator;
-  // poolEntity.value = evtPoolInfo.params.value.plus(evtPoolInfo.params.value)
-
-  // poolEntity.user = [new Member(evtPoolInfo.params.initiator.toHex())]
-  // let id = address.toHexString();
-  // PoolByUser.load(User)
-
-  // let participantEntity = PoolParticipant.load(evtPoolInfo.params.initiator.toHexString())
-
-  // if (!participantEntity) {
-  //   participantEntity = new PoolParticipant(evtPoolInfo.params.initiator.toHexString())
-  // }
-
-  // participantEntity.balance = evtPoolInfo.params.value;
-  // participantEntity.balance = participantEntity.balance.plus(evtPoolInfo.params.value);
-  // participantEntity.user = evtPoolInfo.params.initiator;
-
-  // entity.participant.push(participantEntity.id)
-
-  // participantEntity.save()  
-
 }
-// export function handlePoolCreation(event: PoolCreation): void {}
