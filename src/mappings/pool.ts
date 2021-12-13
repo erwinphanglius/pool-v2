@@ -59,8 +59,6 @@ export function handleFundPool(evtPoolInfo: FundPool): void {
   // let id = address.toHexString();
   // PoolByUser.load(User)
 
-  // userentity.pool = []
-
   // let participantEntity = PoolParticipant.load(evtPoolInfo.params.initiator.toHexString())
 
   // if (!participantEntity) {
