@@ -16,6 +16,8 @@ type User @entity {
 
 type UserInPool @entity {
   id: ID!
+  user: Bytes!
+  pool: Bytes!
   value: BigInt!
 }
 
