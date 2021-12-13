@@ -47,9 +47,8 @@ export function handleFundPool(evtPoolInfo: FundPool): void {
   entity.user = evtPoolInfo.params.initiator;
   entity.value = evtPoolInfo.params.value;
   
-  
-  poolEntity.user = userEntity.id
-  poolEntity.value = evtPoolInfo.params.value.plus(evtPoolInfo.params.value)
+  poolEntity.user = [userEntity.id]
+  // poolEntity.value = evtPoolInfo.params.value.plus(evtPoolInfo.params.value)
   
   userEntity.totalFundAllPool = userEntity.totalFundAllPool.plus(evtPoolInfo.params.value)
   userEntity.pool = [poolEntity.id]
