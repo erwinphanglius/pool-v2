@@ -42,4 +42,5 @@ export function handleFundPool(evtPoolInfo: FundPool): void {
   userInPoolEntity.value = userInPoolEntity.value.plus(evtPoolInfo.params.value);
 
   userInPoolEntity.save()
+  
 }
