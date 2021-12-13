@@ -6,13 +6,12 @@ type Factory @entity {
 
 type Pool @entity {
   id: ID!
-  user: [User!]!
 }
 
 type User @entity {
   id: ID!
   totalFundAllPool: BigInt!
-  pool: [Pool!]!
+  pool: Pool!
 }
 
 type PoolWithUser @entity {

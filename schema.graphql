@@ -6,6 +6,7 @@ type Factory @entity {
 
 type Pool @entity {
   id: ID!
+  users: [User!]! @derivedFrom(field: "pool")
 }
 
 type User @entity {
