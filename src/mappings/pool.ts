@@ -58,7 +58,6 @@ export function handleFundPool(evtPoolInfo: FundPool): void {
   poolEntity.save()
   poolWithUserEntity.save()
 
-  
   // poolEntity.user = evtPoolInfo.params.initiator;
   // poolEntity.value = evtPoolInfo.params.value.plus(evtPoolInfo.params.value)
 
@@ -81,6 +80,4 @@ export function handleFundPool(evtPoolInfo: FundPool): void {
   // participantEntity.save()  
 
 }
-
-
 // export function handlePoolCreation(event: PoolCreation): void {}
