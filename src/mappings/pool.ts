@@ -7,23 +7,6 @@ import {
 } from "../../generated/templates/MetaversepadTemplate/Metaversepad"
 import { Factory, User, PoolByUser, Pool, UserInPool } from "../../generated/schema"
 
-// export function bindToUser(address: Address, poolAddress: Address, newBalance: BigInt): void {
-//   let id = address.toHexString();
-//   let user = User.load(id);
-//   if (user == null) {
-//     user = new User(id);
-//     user.pool = poolAddress;
-//     user.balance = BigInt.fromI32(0);
-//   }
-//   user.balance = user.balance.plus(newBalance)
-//   user.save();
-// }
-
-// export function loadOrCreatePool(poolAddress: Address): Pool {
-//   let pool = Pool.load(poolAddress.toHex())
-//   return pool as Pool
-// }
-
 export function handleFundPool(evtPoolInfo: FundPool): void {
   let entity = PoolByUser.load(evtPoolInfo.transaction.hash.toHex())
   let userEntity = User.load(evtPoolInfo.params.initiator.toHex())
