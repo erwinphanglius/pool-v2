@@ -14,7 +14,7 @@ type User @entity {
   pool: [Pool!]!
 }
 
-type PoolWithUser @entity {
+type UserInPool @entity {
   id: ID!
   value: BigInt!
 }
