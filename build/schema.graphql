@@ -4,9 +4,3 @@ type Factory @entity {
   poolAddress: Bytes! # address
 }
 
-type PoolByUser @entity {
-  id: ID!
-  poolAddress: Bytes!
-  user: Bytes! # address
-  value: BigInt!
-}
