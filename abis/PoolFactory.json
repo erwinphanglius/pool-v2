@@ -1,10 +1,5 @@
 [
   {
-    "inputs": [{ "internalType": "string", "name": "_name", "type": "string" }],
-    "stateMutability": "nonpayable",
-    "type": "constructor"
-  },
-  {
     "anonymous": false,
     "inputs": [
       {
@@ -79,10 +74,26 @@
     "type": "event"
   },
   {
-    "inputs": [],
-    "name": "name",
-    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
-    "stateMutability": "view",
+    "inputs": [
+      { "internalType": "uint256", "name": "poolMaxCap", "type": "uint256" },
+      { "internalType": "uint256", "name": "saleStartTime", "type": "uint256" },
+      { "internalType": "uint256", "name": "saleEndTime", "type": "uint256" },
+      { "internalType": "uint256", "name": "noOfTiers", "type": "uint256" },
+      {
+        "internalType": "uint256",
+        "name": "totalParticipants",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address payable",
+        "name": "projectOwner",
+        "type": "address"
+      },
+      { "internalType": "address", "name": "tokenAddress", "type": "address" }
+    ],
+    "name": "launchPool",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -104,29 +115,6 @@
       { "internalType": "address", "name": "newOwner", "type": "address" }
     ],
     "name": "transferOwnership",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "uint256", "name": "poolMaxCap", "type": "uint256" },
-      { "internalType": "uint256", "name": "saleStartTime", "type": "uint256" },
-      { "internalType": "uint256", "name": "saleEndTime", "type": "uint256" },
-      { "internalType": "uint256", "name": "noOfTiers", "type": "uint256" },
-      {
-        "internalType": "uint256",
-        "name": "totalParticipants",
-        "type": "uint256"
-      },
-      {
-        "internalType": "address payable",
-        "name": "projectOwner",
-        "type": "address"
-      },
-      { "internalType": "address", "name": "tokenAddress", "type": "address" }
-    ],
-    "name": "launchPool",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

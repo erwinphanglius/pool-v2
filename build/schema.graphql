@@ -2,6 +2,7 @@ type Pool @entity {
   id: ID!
   createdAt: BigInt!
   startedAt: BigInt!
+  endedAt: BigInt!
   participants: BigInt!
   totalRaised: BigInt!
 }
