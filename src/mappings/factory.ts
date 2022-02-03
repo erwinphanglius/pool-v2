@@ -1,54 +1,23 @@
-import { BigInt } from "@graphprotocol/graph-ts"
 import {
-  PoolFactory,
   PoolCreation
 } from "../../generated/PoolFactory/PoolFactory"
-import { Factory } from "../../generated/schema"
+import { Pool } from "../../generated/schema"
 import { MetaversepadTemplate } from "../../generated/templates"
+import { BigInt } from "@graphprotocol/graph-ts";
 
 export function handlePoolCreation(event: PoolCreation): void {
-  // Entities can be loaded from the store using a string ID; this ID
-  // needs to be unique across all entities of the same type
-  let factoryEntity = Factory.load(event.transaction.hash.toHex())
+  let poolEntity = Pool.load(event.params.poolAddress.toHex())
 
-  // Entities only exist after they have been saved to the store;
-  // `null` checks allow to create entities on demand
-  if (!factoryEntity) {
-    factoryEntity = new Factory(event.transaction.hash.toHex())
-
-    // Entity fields can be set using simple assignments
-    // entity.count = BigInt.fromI32(0)
+  if (!poolEntity) {
+    poolEntity = new Pool(event.params.poolAddress.toHex())
   }
 
-  // BigInt and BigDecimal math are supported
-  // entity.count = entity.count + BigInt.fromI32(1)
+  poolEntity.createdAt = event.params.timestamp
+  poolEntity.startedAt = event.params.saleStartTime
+  poolEntity.participants = event.params.totalParticipants
+  poolEntity.totalRaised = BigInt.fromI32(0)
 
-  // Entity fields can be set based on event parameters
-  factoryEntity.timestamp = event.params.timestamp
-  factoryEntity.poolAddress = event.params.poolAddress
-
-  // Entities can be written to the store with `.save()`
   MetaversepadTemplate.create(event.params.poolAddress)
 
-  factoryEntity.save()
-
-  // Note: If a handler doesn't require existing field values, it is faster
-  // _not_ to load the entity from the store. Instead, create it fresh with
-  // `new Entity(...)`, set the fields that should be updated and save the
-  // entity back to the store. Fields that were not set or unset remain
-  // unchanged, allowing for partial updates to be applied.
-
-  // It is also possible to access smart contracts from mappings. For
-  // example, the contract that has emitted the event can be connected to
-  // with:
-  //
-  // let contract = Contract.bind(event.address)
-  //
-  // The following functions can then be called on this contract to access
-  // state variables and other data:
-  //
-  // - contract.name(...)
-  // - contract.owner(...)
+  poolEntity.save()
 }
-
-// export function handlePoolCreation(event: PoolCreation): void {}
