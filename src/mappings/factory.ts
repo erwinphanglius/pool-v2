@@ -14,6 +14,7 @@ export function handlePoolCreation(event: PoolCreation): void {
 
   poolEntity.createdAt = event.params.timestamp
   poolEntity.startedAt = event.params.saleStartTime
+  poolEntity.endedAt = event.params.saleEndTime
   poolEntity.participants = event.params.totalParticipants
   poolEntity.totalRaised = BigInt.fromI32(0)
 
