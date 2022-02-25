@@ -17,5 +17,4 @@ type UserInPool @entity {
 type Factory @entity {
   id: ID!
   totalRaised: BigInt!
-  pool: [Pool!]!
 }

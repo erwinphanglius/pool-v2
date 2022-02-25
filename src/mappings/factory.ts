@@ -1,17 +1,17 @@
 import {
   PoolCreation
 } from "../../generated/PoolFactory/PoolFactory"
-import { Factory, Pool } from "../../generated/schema"
+import {  Pool } from "../../generated/schema"
 import { MetaversepadTemplate } from "../../generated/templates"
 import { BigInt } from "@graphprotocol/graph-ts";
 
 export function handlePoolCreation(event: PoolCreation): void {
-  let factoryEntity = Factory.load(event.address.toHex())
+  // let factoryEntity = Factory.load(event.address.toHex())
   let poolEntity = Pool.load(event.params.poolAddress.toHex())
 
-  if (!factoryEntity) {
-    factoryEntity = new Factory(event.address.toHex())
-  }
+  // if (!factoryEntity) {
+  //   factoryEntity = new Factory(event.address.toHex())
+  // }
 
   if (!poolEntity) {
     poolEntity = new Pool(event.params.poolAddress.toHex())
@@ -27,6 +27,6 @@ export function handlePoolCreation(event: PoolCreation): void {
 
   MetaversepadTemplate.create(event.params.poolAddress)
 
-  factoryEntity.save()
+  // factoryEntity.save()
   poolEntity.save()
 }
